@@ -4,6 +4,7 @@ import argparse
 import numpy as np
 import utils as ut
 from PIL import Image
+from skimage.feature import peak_local_max
 
 # ===========================================
 #        Parse the argument
@@ -174,6 +175,15 @@ def adapt_gmn():
         img = Image.fromarray(model_predicts[i,:,:,:],'RGB')
         img.save(r'C:\Users\Sri\Documents\GitHub\class-agnostic-counting\src\path\to\pipe_dataset_reshaped_predictions\\'+str(i)+'.png')
         img.show()
+    
+    import matplotlib.pyplot as plt
+    import numpy as np
+    for i in range(5):
+        plt.imshow(model_predicts[i,:,:,:].reshape(200,200), cmap='hot', interpolation='nearest')  
+        plt.savefig(r'C:\Users\Sri\Documents\GitHub\class-agnostic-counting\src\path\to\pipe_dataset_reshaped_predictions\\'+str(i)+'_heatmap.png')
+        plt.show()
+        print(i,"--",len(peak_local_max(model_predicts[i,:,:,:].reshape(200,200))))
+    
     
 
 if __name__ == '__main__':
