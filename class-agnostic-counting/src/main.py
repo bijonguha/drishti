@@ -159,10 +159,10 @@ def adapt_gmn():
                  normal_lr, tbcallbacks]
     print('<------------------------------------------------------------------->')
     model.fit_generator(trn_gen,
-                        steps_per_epoch=600,
+                        steps_per_epoch=10,
                         epochs=args.epochs,
                         validation_data=val_gen,
-                        validation_steps=100,
+                        validation_steps=10,
                         callbacks=callbacks,
                         verbose=1)
     trn_gen, val_gen = data_generator.setup_generator(**params)
